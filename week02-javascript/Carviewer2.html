@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<style>
+		rect:hover {fill: black;}
+		#myTable {
+			
+		}
+		.half {
+			width: 20%;
+		}
+		.double {
+			width: 50%;
+		}
+		</style>
+		<meta charset="UTF-8">
+		<!-- Question 1 -->
+		<title>View Cars</title>
+
+	</head>
+	<body>
+		<h1>Cars</h1> 
+
+		<div>
+			<!-- Question 2 & Question 4 -->
+            <div><button id="showCreateButton" onclick="showCreate()">Create</button></div>
+            <div><button onclick="showUpdate()" style.display="block">Update</button></div>
+		</div>
+		
+
+		<div>
+		<h2>All Cars</h2>
+		<br>
+            <!-- Question 2 b -->
+            <table class="table" id="carTable">
+                    <!-- border="2"
+					cellpadding="2"
+					cellspacing="2"
+					bgcolor="#efefef"
+					width="500" -->
+					
+				<!-- Question 4 a -->
+				<tr>
+					<th col width="100px">reg</th>
+					<th col width="50px">make</th>
+					<th col width="50px">model</th>
+					<th col width="50px">price</th>
+					<th col width="50px">Update</th>
+					<th col width="50px">Delete</th>
+				</tr>
+				<tr>
+				<!-- Question 4 b -->
+					<td>191 MO 123</td>
+					<td>Ford</td>
+					<td>Mondeo</td>
+					<td>25000</td>
+					<td><button onclick="showUpdate">update</button></td>
+					<td><button>delete</button></td>
+				</tr>
+				<tr>
+					<td>12 D 123</td>
+					<td>Fiat</td>
+					<td>Punto</td>
+					<td>4000</td>
+					<td><button onclick="showUpdate">update</button></td>
+					<td><button>delete</button></td>
+				</tr>
+				<tr>
+					<td>08 D 123</td>
+					<td>Nissan</td>
+					<td>Almera</td>
+					<td>500</td>
+					<td><button onclick="showUpdate">update</button></td>
+					<td><button>delete</button></td>
+				</tr>
+			</table>
+		<br>
+		</div>
+
+<!-- Question 1 -->
+		<div id="CreateUpdateForm" style="display: none">
+			<!-- Question  5 a-->
+			<h2><span id="createLabel">Create a</span> <span id="updateLabel">Update</span> Car</h2>
+			
+			<!-- Question  -->
+			Reg <input type="text" name="reg"><br/>
+			Make <select name="make">
+					<option value="Ford">Ford</option>
+					<option value="Fiat">Fiat</option>
+					<option value="Nissan">Nissan</option>
+			</select> <br/>
+			Model <input type="text" name="model"><br/>
+			Price <input type="number" name="price"><br/>
+			
+			<!-- Question  5 b -->
+			<span><button id="doCreateButton" onclick="doCreate()" style="margin:5px;">Create</button></span>
+			<span><button id="doUpdateButton" onclick="doUpdate()" style="margin:5px;">Update</button></span>
+		</div>
+    </body>
+    <script>
+        // Question 3
+        function showCreate(){
+            document.getElementById('showCreateButton').style.display="none" //hide - element not displayed
+            document.getElementById('carTable').style.display="none" //hide - element not displayed
+            document.getElementById('createUpdateForm').style.display="block" //show
+            
+            // Question 6
+            document.getElementById('createLabel').style.display="inline" // no new line
+            //document.getElementById('createLabel').style.display="inline-block" //test inline-block
+            //document.getElementById('createLabel').style.display="block" // test block
+            document.getElementById('updateLabel').style.display="none" // hide- element not displayed
+
+            document.getElementById('doCreateButton').style.display="block" // show create on new line
+            document.getElementById('doUpdateButton').style.display="none" // hide- element not displayed
+        }
+        // Question 7 - do the opposite of question 6
+        function showUpdate(){
+            document.getElementById('showCreateButton').style.display="none" //hide - element not displayed
+            document.getElementById('carTable').style.display="none" //hide - element not displayed
+            document.getElementById('createUpdateForm').style.display="block" //show
+            
+            
+            document.getElementById('createLabel').style.display="none" // hide - element not displayed
+            document.getElementById('updateLabel').style.display="inline" // This time show Update
+
+            document.getElementById('doCreateButton').style.display="none" // hide - element not displayed
+            document.getElementById('doUpdateButton').style.display="block" // This time show Update
+        }
+    </script>
+</html>
