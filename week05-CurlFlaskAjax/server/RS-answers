@@ -1,0 +1,198 @@
+#Question 14 a - Get All
+λ curl -i http://localhost:5000/cars   
+HTTP/1.0 200 OK                        
+Content-Type: application/json         
+Content-Length: 349                    
+Server: Werkzeug/0.16.0 Python/3.7.4   
+Date: Sat, 21 Dec 2019 17:39:14 GMT    
+                                       
+{                                      
+  "cars": [                            
+    {                                  
+      "make": "Ford",                  
+      "model": "Modeo",                
+      "price": 18000,                  
+      "reg": "181 G 1234"              
+    },                                 
+    {                                  
+      "make": "Nissan",                
+      "model": "Almera",               
+      "price": 8000,                   
+      "reg": "11 MO 1234"              
+    },                                 
+    {                                  
+      "make": "Nissan",                
+      "model": "Almera",               
+      "price": 8000,                   
+      "reg": "test"                    
+    }                                  
+  ]                                    
+}
+
+#Question 14 b - Find by ID
+λ curl -i http://localhost:5000/cars/test 
+HTTP/1.0 200 OK                           
+Content-Type: application/json            
+Content-Length: 104                       
+Server: Werkzeug/0.16.0 Python/3.7.4      
+Date: Sat, 21 Dec 2019 17:40:31 GMT       
+                                          
+{                                         
+  "car": {                                
+    "make": "Nissan",                     
+    "model": "Almera",                    
+    "price": 8000,                        
+    "reg": "test"                         
+  }                                       
+}  
+
+#Question 14 c - Create
+λ curl -i -H "Content-Type: application/json" -X POST -d "{\"reg\":\"12 D 123234\",\"make\":\"Fiat\",\"model\":\"Punto\",\"price\":3000}" http://localhost:5000/cars
+HTTP/1.0 201 CREATED
+Content-Type: application/json
+Content-Length: 108
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 17:54:37 GMT
+
+{
+  "car": {
+    "make": "Fiat",
+    "model": "Punto",
+    "price": 3000,
+    "reg": "12 D 123234"
+  }
+}   
+
+#Check it worked
+λ curl -i http://localhost:5000/cars
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 460
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 18:09:40 GMT
+
+{
+  "cars": [
+    {
+      "make": "Ford",
+      "model": "Modeo",
+      "price": 18000,
+      "reg": "181 G 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "11 MO 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "test"
+    },
+    {
+      "make": "Fiat",
+      "model": "Punto",
+      "price": 3000,
+      "reg": "12 D 123234"
+    }
+  ]
+}    
+
+#Question 14 d - Update
+λ curl -i -H "Content-Type:application/json" -X PUT -d "{\"make\":\"Ford\",\"model\":\"Fiesta\"}" http://localhost:5000/cars/12%20D%201234
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 108
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 18:02:33 GMT
+
+{
+  "car": {
+    "make": "Ford",
+    "model": "Fiesta",
+    "price": 3000,
+    "reg": "12 D 123234"
+  }
+}
+
+#Check it worked
+λ curl -i http://localhost:5000/cars
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 460
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 18:02:44 GMT
+
+{
+  "cars": [
+    {
+      "make": "Ford",
+      "model": "Modeo",
+      "price": 18000,
+      "reg": "181 G 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "11 MO 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "test"
+    },
+    {
+      "make": "Ford", #it worked
+      "model": "Fiesta", #it worked
+      "price": 3000,
+      "reg": "12 D 123234"
+    }
+  ]
+}
+
+#Question 14 e
+λ curl -i -X DELETE http://localhost:5000/cars/12%20D%20123234
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 21
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 17:58:59 GMT
+
+{
+  "result": true
+}
+
+#Check it worked
+λ curl -i http://localhost:5000/cars
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 349
+Server: Werkzeug/0.16.0 Python/3.7.4
+Date: Sat, 21 Dec 2019 18:14:59 GMT
+
+{
+  "cars": [
+    {
+      "make": "Ford",
+      "model": "Modeo",
+      "price": 18000,
+      "reg": "181 G 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "11 MO 1234"
+    },
+    {
+      "make": "Nissan",
+      "model": "Almera",
+      "price": 8000,
+      "reg": "test"
+    }
+  ]
+}     
