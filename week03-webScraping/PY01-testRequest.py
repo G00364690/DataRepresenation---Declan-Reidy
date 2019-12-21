@@ -43,8 +43,10 @@ with open("PY03-readOutFile3.py", mode="w") as output:
 with open("PY03-readOutFile4.py", mode="w") as output:
     rows = soup.findAll("tr")
     for row in rows:
-        dataList = []
+        
         cols = row.findAll("td")
+        dataList = []
         for col in cols:
             dataList.append(col.text)
         print(dataList, file=output) #verified works 
+
