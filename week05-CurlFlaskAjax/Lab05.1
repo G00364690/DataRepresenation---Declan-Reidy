@@ -1,0 +1,55 @@
+λ curl google.com
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+
+Question 1
+λ curl -i google.com                                                          
+HTTP/1.1 301 Moved Permanently                                                
+Location: http://www.google.com/                                              
+Content-Type: text/html; charset=UTF-8                                        
+Date: Sat, 21 Dec 2019 15:23:50 GMT                                           
+Expires: Mon, 20 Jan 2020 15:23:50 GMT                                        
+Cache-Control: public, max-age=2592000                                        
+Server: gws                                                                   
+Content-Length: 219                                                           
+X-XSS-Protection: 0                                                           
+X-Frame-Options: SAMEORIGIN                                                   
+
+Question 2                                                                            
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>                                         
+<H1>301 Moved</H1>                                                            
+The document has moved                                                        
+<A HREF="http://www.google.com/">here</A>.                                    
+</BODY></HTML>
+
+Question 3
+/employee
+curl http://dummy.restapiexample.com/api/v1/employees
+[{"id":"1","employee_name":"test1576941787472","employee_salary":"0","employee_age":"0","profile_image":""},
+{"id":"216606","employee_name":"Chaithanya12212019030054","employee_salary":"45000","employee_age":"28","profile_image":""},
+{"id":"216610","employee_name":"Chaithanya12212019030103","employee_salary":"45000","employee_age":"28","profile_image":""},
+
+Question 3 b
+/employee/{id}
+No employee 2202 - chose 216606 from above.
+curl http://dummy.restapiexample.com/api/v1/employee/216619
+{"id":"216606","employee_name":"Chaithanya12212019030054","employee_salary":"45000","employee_age":"28","profile_image":""}
+
+Question 4 to delete
+/delete/{id}
+curl -x DELETE http://dummy.restapiexample.com/api/v1/delete/216619
+
+Question 5 to create employee
+curl -i -d “{\"name\":\"jj\",\"salary\":\"123\",\"age\":\"23\"}” -
+H “Content-Type: application/json” -X POST
+http://dummy.restapiexample.com/api/v1/create
+
+Question 6 - update an employee
+curl -d “{\"name\":\"Mary\",\"salary\":\"12000\",\"age\":99}” -H
+“Content-Type: application/json” -X PUT http://dummy.restapiexam
+ple.com/api/v1/update/216610
