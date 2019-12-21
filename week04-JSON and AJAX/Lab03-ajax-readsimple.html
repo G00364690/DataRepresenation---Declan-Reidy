@@ -1,0 +1,41 @@
+<html>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>
+            read a simple json
+        </title>
+    </head>
+    <body>
+        <button onclick="readJSON()">go</button>
+        <div id="output1"></div>
+        <div id="output2"></div> 
+        <div id="output3"></div>
+    </body>
+    <script>
+        function readJSON(){
+            $.ajax({
+                "url":"http://api.coindesk.com/v1/bpi/currentprice.json",
+                "method":"GET",
+                "data":"",
+                "dataType":"JSON",
+                "success":function(result){
+                    console.log(JSON.stringify(result));
+                    var rateEUR = result.bpi.EUR.rate
+                    var rateUSD = result.bpi.USD.rate
+                    var rateGBP = result.bpi.GBP.rate
+                    console.log(rateEUR);
+                    console.log(rateUSD);
+                    console.log(rateGBP);
+                    document.getElementById("output1").innerText = "The EUR rate is: "+rateEUR;
+                    document.getElementById("output2").innerText = "The USD rate is: "+rateUSD;
+                    document.getElementById("output3").innerText = "The GBP rate is: "+rateGBP;
+                },
+                "error":function(xhr, status, error){
+                    //console.log("error: "+status+" msg:"+error);
+                    console.log("status: "+status+" message:"+error);
+                }
+            });
+        }
+    </script>
+</html>  
