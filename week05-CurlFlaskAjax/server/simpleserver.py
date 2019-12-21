@@ -1,5 +1,8 @@
+#Question 3
+
 from flask import Flask
 
+#Question 6
 app = Flask(__name__,
             static_url_path='',
             static_folder='../')
@@ -10,3 +13,5 @@ def index():
 
 if __name__ == '__main__' :
     app.run(debug= True)
+
+                                                     
