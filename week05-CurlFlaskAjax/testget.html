@@ -1,0 +1,88 @@
+<html>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <head>
+        <title>test get and create </title>
+    </head>
+    
+    <body>
+        <button onclick="getAll()">getAll</button>
+        <button onclick="createCar()">create</button>
+        <div id="output"></div>
+        <table id="carsTable">
+            <tr>
+                    <th >reg</th><th>make</th><th>model</th><th>price</th><th></th><th></th>  
+            </tr>
+        </table>
+    </body>
+
+    <script>
+        function getall(){
+            $.ajax({
+                url: "http:127.0.0.1:5000/cars",
+                method: "GET",
+                data: "",
+                dataType: "JSON",
+                success: function(result){
+                    console.log(result);
+                },
+                error: function(xhr, status, error){
+                    console.log("error "+status+" msg:"+error);
+                }
+            });
+
+        }
+        function createCar(){
+                var car = {"reg":"12 D 1234","make":"Fiat","model":"Punto",
+                "price":3000}
+                console.log(JSON.stringify(car));
+                $.ajax({
+                "url": "http://127.0.0.1:5000/cars",
+                "method":"POST",
+                "data":JSON.stringify(car),
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success":function(result){
+                console.log(result);
+                document.getElementById("output").innerText = JSON.
+            stringify(result);
+                },
+                "error":function(xhr,status,error){
+                console.log("error: "+status+" msg:"+error);
+                }
+                });
+                }
+                
+                function doUpdate(){
+                    var car = getCarFromForm();
+                    var rowElement = document.getElementById(car.reg)
+                    setCarInRow(rowElement,car)
+                
+                    clearForm()
+                    showViewAll()
+                }
+
+                function doDelete(r){
+                    var tableElement = document.getElementById('carTable')
+                    var index = r.parentNode.parentNode.rowIndex;
+                    tableElement.deleteRow(index);
+                }
+                
+                function addCarToTable(car){
+                    var tableElement = document.getElementById('carTable')
+                    var rowElement = tableElement.insertRow(-1)
+                    rowElement.setAttribute('id',car.reg)
+                    var cell1 = rowElement.insertCell(0);
+                    cell1.innerHTML = car.reg
+                    var cell2 = rowElement.insertCell(1);
+                    cell2.innerHTML = car.make
+                    var cell3 = rowElement.insertCell(2);
+                    cell3.innerHTML = car.model
+                    var cell4 = rowElement.insertCell(3);
+                    cell4.innerHTML = car.price
+                    var cell5 = rowElement.insertCell(4);
+                    cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+                    var cell6 = rowElement.insertCell(5);
+                    cell6.innerHTML = '<button onclick=doDelete(this)>delete</button>'
+    }
+        </script>
+</html>
