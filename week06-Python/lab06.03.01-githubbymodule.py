@@ -11,7 +11,7 @@ print(repo)
 print(repo.clone_url)
 
 # Question 5
-#fileInfo = repo.get_contents("clone-FDA-Project.txt")
-#urlOfFile = fileInfo.download_url
+fileInfo = repo.get_contents("Project.txt")
+urlOfFile = fileInfo.download_url
 
-#print(urlOfFile)
+print(urlOfFile)
