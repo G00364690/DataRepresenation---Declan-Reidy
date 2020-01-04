@@ -1,0 +1,12 @@
+ {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### The history of the box plot"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The box plot, according to many sources was introcuded in 1970 by John Tukey in his toolkit for exploratory data analysis. It was formally published in 1977 and became widely known and adopted thereafter. While there is some claim to origin of box plots as Dispersion Diagrams by Mary Eleanor Spear in the 1950s, the naming convention and the rules around how to draw box plots are generally accepted as having been the work of Tukey.\n",

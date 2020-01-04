@@ -2,7 +2,16 @@ from github import Github
 import requests
 
 # remove the minus sign from the key
-g = Github("47d8d1f0600ffbd0e02d03e94269e6c4db029eb2")
+g = Github("32ac307d2ce1061fd8beecb4324002df97b57533")
 
-repo = g.get_repo("https://github.com/G00364690/DataRepresenation---Declan-Reidy.git")
-#print(repo.clone_url)
+repo = g.get_repo("G00364690/Datarepresentation")
+print(repo)
+
+# Question 4
+print(repo.clone_url)
+
+# Question 5
+fileInfo = repo.get_contents("clone-FDA-Project.txt")
+urlOfFile = fileInfo.download_url
+
+print(urlOfFile)
