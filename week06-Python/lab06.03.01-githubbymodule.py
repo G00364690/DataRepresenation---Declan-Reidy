@@ -11,7 +11,14 @@ print(repo)
 print(repo.clone_url)
 
 # Question 5
-fileInfo = repo.get_contents("Project.txt")
+fileInfo = repo.get_contents("week06-python/githubusers.json")
 urlOfFile = fileInfo.download_url
 
-print(urlOfFile)
+response = requests.get(urlOfFile)
+contentOfFile = response.text
+
+newContents = contentOfFile + " more stuff \n"
+print(newContents)
+
+gitHubResponse = repo.update_file(fileInfo.path, "update by prog", newContents, fileInfo.sha)
+print(gitHubResponse)
