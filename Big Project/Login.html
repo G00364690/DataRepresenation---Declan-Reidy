@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<style type="text/css">
+	.myClass1 {
+		border:2px solid black;
+		background-color: #ff7f50;
+		color: #5D5C61;
+		font-family: sans-serif;
+		font-size: 20px;
+		max-width: 1000px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		margin-top: 10%;
+		margin-right: 5%;
+		margin-left: 5%;
+		margin-bottom: 10%;
+		text-indent: 20px;
+	}
+	.myClass2 {
+		border:2px solid black;
+		background-color: #fff68f;
+		color: #5D5C61;
+		font-family: sans-serif;
+		font-size: 10px;
+		max-width: 1000px;
+		overflow-x: hidden;
+		margin-top: 10%;
+		margin-right: 5%;
+		margin-left: 5%;
+		margin-bottom: 10%;
+		text-indent: 20px;
+	}
+	</style>
+		<meta charset="UTF-8">
+		<title>Site Login</title>
+		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
+	</head>
+	<body class="myClass1">
+	
+<! reference: https://github.com/VladVasiljev/Web-Design/blob/master/Login/login.html>
+	<div class="container">
+	<div class="header">
+		<h1>Boards for the Bored <small>Let's all get along!</small></h1>
+	</div>
+	<h3>Please Login</h3>
+	<p>Logging in is optional, but why wouldn't you if we're all going to get along?</p>
+	
+	<form class="myClass2" name="login" onsubmit="return validateForm() ;" method="post">
+	<! enter user name as an email only - separate function written below >
+	<h2>User: <input class="user" type="email" placeholder="Enter user email..." name="user" required></h2>
+	<h2>Password: <input class="password" type="password" placeholder="Enter password..." name="password" required></h2>
+	<input type="button" class="submit" value="Login" name="submit" onclick="validateEmail(document.login.user)">
+
+
+	
+<script>
+// Based on login functionality previously created for Web Application Development as part of Higher Diploma in Data Analytics - May 2019.
+// https://www.w3resource.com/javascript/form/email-validation.php
+function validateEmail(inputText)
+{
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if(inputText.value.match(mailformat))
+{
+document.login.user.focus();
+	if(required(document.login.password.focus()) == true)
+	{
+	alert("Login was successful");
+	window.location = "Home.html";
+	return true;
+	}
+	else
+	{
+	alert("Password is a required field!");
+	}
+}
+else
+{
+alert("You have entered an invalid email address!");
+document.login.user.focus();
+return false;
+}
+}
+
+//https://www.w3resource.com/javascript/form/non-empty-field.php
+function required()
+{
+var empt = document.forms["login"]["password"].value;
+if (empt == "")
+{
+return false;
+}
+else 
+{
+return true; 
+}
+}
+
+
+</script>	
+	<script src="https://chancejs.com/chance.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="main.js">

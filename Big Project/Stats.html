@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" src="https://d3js.org/d3.v5.min.js"></script>
+	<title>Team Stats</title>
+	<meta charset="UTF-8">
+	<style type="text/css">
+	.myClass1 {
+		border:2px solid black;
+		background-color: #ff7f50;
+		color: #5D5C61;
+		font-family: sans-serif;
+		font-size: 20px;
+		max-width: 1000px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		margin-top: 10%;
+		margin-right: 5%;
+		margin-left: 5%;
+		margin-bottom: 10%;
+		}
+	#myID {
+		color: #5D5C61;
+		margin-top: 20px;
+		margin-right: 20px;
+		margin-left: 20px;
+		margin-bottom: 20px;
+	}
+	</style>
+</head>
+
+<a href="Home.html" Id="myID">Home</a>
+<a href="Blogs.html" Id="myID">Blogs</a>
+<a href="Stats.html" Id="myID">User Stats</a>
+<a href="Login.html" Id="myID">Login</a>
+<br>
+
+<h1 Id="myID">Boards for the Bored! <small><i>Let's all get along!</i></small></h1>
+<h2 Id="myID">User Statistics</h2>
+<p Id="myID">Find out a bit more about the site and who the top users are.</p>
+
+<p Id="myID">Filter the metrics to see which users are the most active and on what subjects.</p>
+	
+	<p Id="myID">Choose chart size:
+	<select id="chartHeight">
+		<option value="400">400 Pixels</option>
+		<option value="600">600 Pixels</option>
+		<option value="800">800 Pixels</option>
+	</select>
+	Choose chart color: <input type="color" id="colorPicker">
+	<button onclick="drawChart()">Show chart</button>
+	<div id="myDiv"></div>
+	
+
+</body>
+</html>
+
+<script>
+
+// Take draw chart functions previously created for Web Application Development as part of Higher Diploma in Data Analytics - May 2019.
+function drawChart(){
+	d3.csv("NFLSeasons_1418.csv").then(function(data){ // Keep this for chart
+		console.log(data);
+		
+		// variables for bar chart
+		var height = document.getElementById("chartHeight").value;
+		var width = 992;
+		var dataCount = data.length;
+		var gap = 1;
+		var chartColor = document.getElementById("colorPicker").value;
+		
+		//Create a scale for Y - No space
+			
+		//Create a scale for X	
+		var xScale = d3.scaleBand()
+			.domain(data.map(function(d){
+				return d.TLA; //X axis will be team TLA (three letter abbreviation)
+			}))
+			.range([0,width]);
+			
+		//Create Y Axis	- No space
+			
+		//Create X Axis - Create X axis only and show Y values on chart
+		var xAxis = d3.axisBottom()
+			.scale(xScale);
+			
+		d3.select("#myDiv2").selectAll("*").remove();
+		
+		let svgContainer = d3.select("#myDiv").append("svg")
+			.attr("width",1100)
+			.attr("height",600);
+		
+		//Create rectangle
+		let myRectangle = svgContainer.selectAll("rect")
+			.data(data);
+		
+		//Add attributes to rectangle
+		myRectangle.enter() //append to rectangle as per lecture
+			.append("rect")
+				.attr("x",function(d, i){
+					return (5 + (i*(width/dataCount)));
+					})
+				.attr("y",function(d){
+					return height - d.Average * 10; //multiply by 10 to see easily on graph
+				})
+				.attr("width" ,((width/dataCount) - gap))
+				.attr("height", function(d){
+					return d.Average * 10;
+				})
+				.attr("fill", function(d){ //fill using gradient scale
+					if(d.Average<=8) {return chartColor;} //darkest is best - use chartColor
+					else if (d.Average <=16) {return "#ff4d4d";}
+					else if (d.Average <=24) {return "#ff8080";}
+					else {return "#ffb3b3"} //lightest is worst
+				});
+		
+		//Add labels text for Bar Chart		
+		let myLabel = svgContainer.selectAll("text")
+			.data(data);
+		
+		myLabel.enter()
+			.append("text")
+				.attr("x",function(d, i){
+					return ( 20 + (i*(width/dataCount))); //Tried to write (5 + (width/dataCount)- gap) but unsuccessful
+					})
+				.attr("y",function(d){
+					return (420 - (d.Average * 10)); //Tried to write height + 20 but unsuccessful
+				})
+				.attr("text-anchor","middle")
+				.attr("font-family", "sans-serif")
+				.attr("font-size", "12px")
+				.attr("fill", "white") //use fill for text colour in SVG
+				.text(function(d){
+					return d.Average; //return Team average wins
+				});
+		
+		svgContainer.append("g")
+		.attr("transform","translate(5," + height + ")") //group function to complete
+		.call(xAxis); //call the axis
+	})
+}
+</script>
