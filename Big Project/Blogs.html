@@ -34,13 +34,14 @@
 <p>Post your blog entry here</p>
 
 <br>
-<button onclick="create()">Create post</button>
-<button onclick="update()">Edit post </button>
-<button onclick="delete()">Delete post</button>
-<button onclick="delete()">Get all posts</button>
-<button onclick="delete()">Find post by id</button>
-	
-<div id="myDiv2"></div>
+<div>
+	<input id="input">
+	<button onclick="create()">Create post</button>
+	<button onclick="update()">Edit post </button>
+	<button onclick="delete()">Delete post</button>
+	<button onclick="getall()">Get all posts</button>
+	<button onclick="findby()">Find post by id</button>
+</div>
 
 </body>
 </html>
@@ -48,7 +49,7 @@
 <script>
 	function getall(){
             $.ajax({
-                url: "http:127.0.0.1:5000/blogs",
+                url: "http:127.0.0.1:5000/blogposts",
                 method: "GET",
                 data: "",
                 dataType: "JSON",
@@ -60,5 +61,24 @@
                 }
             });
 
+	function create(){
+			var post = document.getElementById("input").value
+			console.log(JSON.stringify(input));
+			$.ajax({
+			"url": "http://127.0.0.1:5000/blogposts",
+			"method":"POST",
+			"data":JSON.stringify(blogpost),
+			"dataType": "JSON",
+			contentType: "application/json; charset=utf-8",
+			"success": function(result){
+			console.log(result);
+			document.getElementById("output").innerText = JSON.
+		stringify(result);
+			},
+			"error":function(xhr,status,error){
+			console.log("error: "+status+" msg:"+error);
+			}
+			});
+			}
 
 </script>
